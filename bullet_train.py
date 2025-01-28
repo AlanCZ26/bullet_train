@@ -105,7 +105,7 @@ print(printer[1]) # second shot
 print(printer[-1]) # last shot
 
 
-print("work total: " + str(round(0.5 * mass_train * velo_train ** 2, 4)) + " joules")
+print("work net: " + str(round(0.5 * mass_train * velo_train ** 2, 4)) + " joules")
 # "From Newton's second law, it can be shown that work on a free (no fields), rigid (no internal degrees of freedom) body, is equal to the change in kinetic energy Ek corresponding to the linear velocity and angular velocity of that body" - wikipedia, https://en.wikipedia.org/wiki/Work_(physics)#Work_and_energy
 # Since this is the case for our train, as well as since we have no angular component, our total work is simply equal to total change in kinetic energy.
 # Kinetic energy calculated as 1/2 m*v^2.
@@ -144,7 +144,7 @@ plt.show()
 velocity: 0.04322m/s // Fired: 1 bullets // Time: 0.01667 // accel: 2.59329
 velocity: 0.08644m/s // Fired: 2 bullets // Time: 0.03333 // accel: 2.5934     
 velocity: 58.8174m/s // Fired: 1322 bullets // Time: 22.03333 // accel: 2.74867
-work total: 17298043.2423 joules
+work net: 17298043.2423 joules
 """
 
 # if the bullet was 1kg instead of 1lb:
@@ -152,7 +152,7 @@ work total: 17298043.2423 joules
 velocity: 0.09529m/s // Fired: 1 bullets // Time: 0.01667 // accel: 5.71752
 velocity: 0.19059m/s // Fired: 2 bullets // Time: 0.03333 // accel: 5.71806
 velocity: 58.85446m/s // Fired: 600 bullets // Time: 10.0 // accel: 6.06   
-work total: 17319234.8307 joules
+work net: 17319234.8307 joules
 """
 
 # if we had 6000kg of ammo (10x):
@@ -160,7 +160,7 @@ work total: 17319234.8307 joules
 velocity: 0.02863m/s // Fired: 1 bullets // Time: 0.01667 // accel: 1.71803
 velocity: 0.05727m/s // Fired: 2 bullets // Time: 0.03333 // accel: 1.71808     
 velocity: 474.67806m/s // Fired: 13227 bullets // Time: 220.45 // accel: 2.74867
-work total: 1126634428.4607 joules
+work net: 1126634428.4607 joules
 """
 
 # if muzzle velocity was 2020m/s (2x):
@@ -168,7 +168,7 @@ work total: 1126634428.4607 joules
 velocity: 0.08644m/s // Fired: 1 bullets // Time: 0.01667 // accel: 5.18658
 velocity: 0.17289m/s // Fired: 2 bullets // Time: 0.03333 // accel: 5.1868
 velocity: 117.63481m/s // Fired: 1322 bullets // Time: 22.03333 // accel: 5.49734
-work total: 69192172.9693 joules
+work net: 69192172.9693 joules
 """
 
 # if mu was 0.1 instead of 0:
@@ -176,5 +176,5 @@ work total: 69192172.9693 joules
 velocity: 0.02687m/s // Fired: 1 bullets // Time: 0.01667 // accel: 2.59329
 velocity: 0.05374m/s // Fired: 2 bullets // Time: 0.03333 // accel: 2.5934     
 velocity: 37.2027m/s // Fired: 1322 bullets // Time: 22.03333 // accel: 2.74867
-work total: 6920449.3278 joules
+work net: 6920449.3278 joules
 """
