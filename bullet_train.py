@@ -75,7 +75,7 @@ while (mass_ammo - mass_bullet >= 0): # until we don't have enough ammo for one 
 
     accel_cur = (velo_train - velo_prev) / (1/shots_per_second)
     # acceleration = change in velocity divided by change in time.
-    # we're assuming exactly 60 bullets per second so time is exactly bullets / bullets/second
+    # we're assuming exactly 60 bullets per second so delta time is exactly delta bullets / bullets/second
     # we use this number for the matplotlib visualization
 
     force_fric = mass_train * accel_g * mu
