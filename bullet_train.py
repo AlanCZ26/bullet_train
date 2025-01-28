@@ -22,8 +22,7 @@ time_list = []
 velo_list = []
 accel_list = []
 
-sum_work = 0
-
+#we will assume no friction as stated in the problem. We will also assume the gun shoots at exactly 60 bullets per second.
 
 while (mass_ammo - mass_bullet > 0):
     fired += 1 # increment bullets shot
@@ -32,9 +31,6 @@ while (mass_ammo - mass_bullet > 0):
     mass_ammo -= mass_bullet
     accel_cur= (velo_train - velo_prev) / (1/60)
     velo_prev = velo_train
-
-    force_cur = mass_train * accel_cur
-    sum_work += force_cur * velo_train * 1/60
     
     printer.append("ammo left: " + str(round(mass_ammo, 2)) + "kg, v: " + str(round(velo_train, 5)) + "m/s, Fired: " + str(fired) + " bullets / Time: " + str(round(fired / 60, 5)) + " / accel: " + str(round(accel_cur, 5)))
     
@@ -47,7 +43,8 @@ while (mass_ammo - mass_bullet > 0):
 print(printer[0])
 print(printer[1])
 print(printer[-1])
-print(sum_work)
+
+print("work total: " + str(round(0.5 * mass_train * velo_train ** 2, 4)))
 
 
 #formatting borrowed from Ryan
