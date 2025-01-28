@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Numbers attached at the bottom of the file. Graph from MatPlotLib, MatPlotLib formatting by Ryan Pan.
+# Results attached at the bottom of the file. Graph from MatPlotLib, MatPlotLib formatting by Ryan Pan.
 
 # ================================
 #        INITIAL CONDITIONS
@@ -27,6 +27,13 @@ shots_per_second = 60 # shots per second
 muzzle_velocity = 1010 #m/s
 # defined in the problem
 
+mu = 0
+# no friction in default conditions
+
+accel_g = 9.81 # m/s^2
+# gravity constant
+
+
 # ================================
 #           OTHER SETUP
 # ================================
@@ -47,8 +54,10 @@ accel_list = []
 #            MAIN LOOP
 # ================================
 
-#we will assume no friction as stated in the problem. We will also assume the gun shoots at exactly 60 bullets per second.
-while (mass_ammo - mass_bullet > 0): # until we don't have enough ammo for one bullet
+# We will assume no friction as stated in the problem. This means our final velocity is higher than reality. Net work would decrease, since friction would be negative work (force in the opposite direction).
+# We will assume that this is a closed system, and any momentum imparted in the bullets exactly equals the momentum imparted into the train, with zero loss.
+
+while (mass_ammo - mass_bullet >= 0): # until we don't have enough ammo for one bullet
 
     fired += 1 # increment bullets shot
     
@@ -65,8 +74,14 @@ while (mass_ammo - mass_bullet > 0): # until we don't have enough ammo for one b
     # update how much ammo we have left
 
     accel_cur = (velo_train - velo_prev) / (1/shots_per_second)
-    # acceleration = difference in velocity divided by time.
-    # we're assuming exactly 60 bullets per second so time is exactly [fired shots] / 60.
+    # acceleration = change in velocity divided by change in time.
+    # we're assuming exactly 60 bullets per second so time is exactly bullets / bullets/second
+    # we use this number for the matplotlib visualization
+
+    force_fric = mass_train * accel_g * mu
+    velo_train = max(0, velo_train - (force_fric / mass_train) * (1/shots_per_second))
+    # calculate friction (Ffr <= mu Fn, we make sure it can't go negative)
+    # i put this here to look at effects of assumtions (not used for normal conditions)
 
     velo_prev = velo_train
     # since all of our math with updating stuff is done at this point, we can save our previous velocity to be used in the next iteration
@@ -127,7 +142,39 @@ plt.show()
 # default conditions:
 """
 velocity: 0.04322m/s // Fired: 1 bullets // Time: 0.01667 // accel: 2.59329
-velocity: 0.08644m/s // Fired: 2 bullets // Time: 0.03333 // accel: 2.5934
+velocity: 0.08644m/s // Fired: 2 bullets // Time: 0.03333 // accel: 2.5934     
 velocity: 58.8174m/s // Fired: 1322 bullets // Time: 22.03333 // accel: 2.74867
 work total: 17298043.2423 joules
+"""
+
+# if the bullet was 1kg instead of 1lb:
+"""
+velocity: 0.09529m/s // Fired: 1 bullets // Time: 0.01667 // accel: 5.71752
+velocity: 0.19059m/s // Fired: 2 bullets // Time: 0.03333 // accel: 5.71806
+velocity: 58.85446m/s // Fired: 600 bullets // Time: 10.0 // accel: 6.06   
+work total: 17319234.8307 joules
+"""
+
+# if we had 6000kg of ammo (10x):
+"""
+velocity: 0.02863m/s // Fired: 1 bullets // Time: 0.01667 // accel: 1.71803
+velocity: 0.05727m/s // Fired: 2 bullets // Time: 0.03333 // accel: 1.71808     
+velocity: 474.67806m/s // Fired: 13227 bullets // Time: 220.45 // accel: 2.74867
+work total: 1126634428.4607 joules
+"""
+
+# if muzzle velocity was 2020m/s (2x):
+"""
+velocity: 0.08644m/s // Fired: 1 bullets // Time: 0.01667 // accel: 5.18658
+velocity: 0.17289m/s // Fired: 2 bullets // Time: 0.03333 // accel: 5.1868
+velocity: 117.63481m/s // Fired: 1322 bullets // Time: 22.03333 // accel: 5.49734
+work total: 69192172.9693 joules
+"""
+
+# if mu was 0.1 instead of 0:
+"""
+velocity: 0.02687m/s // Fired: 1 bullets // Time: 0.01667 // accel: 2.59329
+velocity: 0.05374m/s // Fired: 2 bullets // Time: 0.03333 // accel: 2.5934     
+velocity: 37.2027m/s // Fired: 1322 bullets // Time: 22.03333 // accel: 2.74867
+work total: 6920449.3278 joules
 """
