@@ -30,11 +30,12 @@ velo_list = []
 accel_list = []
 # for printing and matplotlib.
 
+#we will assume no friction as stated in the problem. We will also assume the gun shoots at exactly 60 bullets per second.
 while (mass_ammo - mass_bullet > 0): # until we don't have enough ammo for one bullet
 
     fired += 1 # increment bullets shot
     
-    mass_train-= mass_bullet 
+    mass_train -= mass_bullet 
     # decrement train mass_trainby how much the bullet is firing to split the two into different objects before the calculation
     
     velo_train += 1010 * mass_bullet / mass_train 
